@@ -26,8 +26,10 @@ public class TPJ_Food {
         System.out.println("점주님들의 번창을 기원합니다.");
         System.out.println();
         int io = -1;
+        int passNum = 0;
+        int idx =0;
 
-        String userName ="";
+        String userName = "";
         while (true) {
             System.out.println("메뉴를 선택 해주세요.");
             System.out.println();
@@ -36,6 +38,8 @@ public class TPJ_Food {
             System.out.println();
             System.out.print(">> ");
             int registerNum = sc.nextInt();
+
+
             switch (registerNum) {
 
                 // 회원가입
@@ -47,7 +51,7 @@ public class TPJ_Food {
                     System.out.println();
                     System.out.println("사용하실 아이디를 입력해주세요.");
                     while (true) {
-                        int passNum = 0;
+                        passNum = 0;
                         System.out.print(">> ");
                         String newID = sc.next();
 
@@ -116,9 +120,10 @@ public class TPJ_Food {
                         String ID = sc.next();
 
                         //서치 알고리즘
-                        int passNum = 0;
+                        passNum = 0;
                         for (int i = 0; i < user.length; i++) {
                             if (user[0][i].equals(ID)) {
+                                idx = i;
                                 passNum = 1;
                                 break;
                             } else passNum = 0;
@@ -145,6 +150,7 @@ public class TPJ_Food {
                             if (user[1][i].equals(PW)) {
                                 passPW = 1;
                                 nameNum = i;
+
                                 break;
                             } else passPW = 0;
                         }
@@ -160,45 +166,50 @@ public class TPJ_Food {
             }
             break;
         }
+
+
         // END LOGIN SYSTEM
-
-        System.out.println();
-        System.out.println(">> 처리하실 업무를 선택하세요.");
-        System.out.println();
-        System.out.println(" 1. 신규 음식점 등록");
-        System.out.println(" 2. 가게 관리");
-        System.out.print(">> ");
-        int menuNum = sc.nextInt();
-
-        switch (menuNum){
-            case 1:
-                System.out.println("신규 음식점 이름을 입력해주세요.");
-                String newFoodMarket = sc.next();
-
-                 String[][] temp = new String[market.length+1][market.length+1] ;
-                int i = 0;
-                for (i = 0; i < market.length; i++) {
-                    temp[i][i]=market[i][i];
-                }
-
-                temp[market.length][market.length] = newFoodMarket;
-
-                market = temp;
-                temp =null;
-
-                System.out.printf("%s님의 새로운 음식점:%s",userName,market[i][i]);
-                System.out.printf("축하드립니다!!!!");
-                break;
-
-            case 2:
-                System.out.println("1. 매출 보기");
-                System.out.println("2. 메뉴 가격 변경");
-                System.out.println("3. 상호명 변경");
+        while (true) {
+            System.out.println();
+            System.out.println(">> 처리하실 업무를 선택하세요.");
+            System.out.println();
+            System.out.println(" 1. 신규 음식점 등록");
+            System.out.println(" 2. 가게 관리");
+            System.out.print(">> ");
+            int menuNum = sc.nextInt();
 
 
+            switch (menuNum) {
+                case 1:
+                    System.out.println("신규 음식점 이름을 입력해주세요.");
+                    String newFoodMarket = sc.next();
+
+                    String[][] temp = new String[market.length + 1][market.length + 1];
+                    int i = 0;
+                    for (i = 0; i < market.length; i++) {
+                        temp[idx][idx] = market[idx][i];
+                    }
+
+                    temp[market.length][market.length] = newFoodMarket;
+
+                    market = temp;
+                    temp = null;
+
+                    System.out.printf("%s님의 새로운 음식점:%s이 등록되었습니다.\n", user[2][idx], market[i][i]);
+                    System.out.printf("축하드립니다!!!!\n");
+                    break;
+
+                case 2:
+                    System.out.println("1. 매출 보기");
+                    System.out.println("2. 메뉴 가격 변경");
+                    System.out.println("3. 상호명 변경");
+                    String SelectNum = sc.next();
 
 
+            }
+            continue;
         }
+
 
     } // end main
 } // end class
